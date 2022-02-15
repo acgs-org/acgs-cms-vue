@@ -3,6 +3,7 @@ import { reactive } from "vue";
 
 import { getTokens, type LoginInfo } from "@/api/token";
 import { useUserStore } from "@/stores/user";
+import { i18nRender } from "@/locales";
 
 const loginInfo: LoginInfo = reactive({
   username: "",
@@ -41,7 +42,7 @@ const login = async () => {
             v-model="loginInfo.username"
             type="text"
             autocomplete="off"
-            placeholder="请输入用户名"
+            :placeholder="i18nRender('login.username')"
           />
           <div class="u-icon">&nbsp;</div>
         </div>
@@ -50,11 +51,13 @@ const login = async () => {
             v-model="loginInfo.password"
             type="password"
             autocomplete="off"
-            placeholder="请输入密码"
+            placeholder="i18nRender('login.password')"
           />
           <div class="p-icon">&nbsp;</div>
         </div>
-        <button class="submit" type="submit">登&nbsp;录</button>
+        <button class="submit" type="submit">
+          {{ i18nRender("login.button") }}
+        </button>
       </form>
     </div>
   </div>
