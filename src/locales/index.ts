@@ -1,30 +1,31 @@
 import { createI18n } from "vue-i18n";
 
+import zhCN from "./lang/zh-CN";
+import enUS from "./lang/en-US";
+
+export const defaultLang = "zh-CN";
+
+const messages = {
+  "zh-CN": {
+    ...zhCN,
+  },
+  "en-US": {
+    ...enUS,
+  },
+};
+
 const i18n = createI18n({
   legacy: false,
-  locale: "en",
-  fallbackLocale: "zn",
-  messages: {
-    en: {
-      login: {
-        username: "please input username.",
-        button: "login",
-      },
-    },
-    zn: {
-      login: {
-        username: "请输入用户名",
-        button: "登录",
-      },
-    },
-  },
+  locale: "zh-CN",
+  fallbackLocale: "en-US",
+  messages,
 });
 
 export const changeLang = (): void => {
-  if (i18n.global.locale.value === "en") {
-    i18n.global.locale.value = "zn";
+  if (i18n.global.locale.value === "zh-CN") {
+    i18n.global.locale.value = "en-US";
   } else {
-    i18n.global.locale.value = "en";
+    i18n.global.locale.value = "zh-CN";
   }
 };
 
