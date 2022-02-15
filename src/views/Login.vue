@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive } from "vue";
 
-import { getTokens, type LoginInfo, type Tokens } from "@/api/token";
+import { getTokens, type LoginInfo } from "@/api/token";
 import { useUserStore } from "@/stores/user";
 
 const loginInfo: LoginInfo = reactive({
