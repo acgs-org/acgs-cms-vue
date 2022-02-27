@@ -1,11 +1,15 @@
-import router from "@/router";
-import config from "@/config";
+import { reactive } from "vue";
 
-const asyncRoutes = config.asyncRouterMap;
+import router from "@/router";
+import { asyncRouterMap, stage } from "@/config";
 
 export const initRouter = () => {
-  asyncRoutes.forEach((route) => {
+  asyncRouterMap.forEach((route) => {
     router.addRoute(route);
   });
   router.push({ path: "/" });
+};
+
+export const getMenus = () => {
+  return reactive(stage);
 };

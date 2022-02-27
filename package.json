@@ -12,6 +12,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@ant-design/icons-vue": "^6.0.1",
     "ant-design-vue": "^3.0.0-beta.9",
     "axios": "^0.26.0",
     "pinia": "^2.0.11",
