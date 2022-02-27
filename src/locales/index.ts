@@ -21,11 +21,13 @@ const i18n = createI18n({
   messages,
 });
 
-export const changeLang = (): void => {
+export const changeLang = (): string => {
   if (i18n.global.locale.value === "zh-CN") {
     i18n.global.locale.value = "en-US";
+    return "en-US";
   } else {
     i18n.global.locale.value = "zh-CN";
+    return "zh-CN";
   }
 };
 

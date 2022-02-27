@@ -4,6 +4,7 @@ import { reactive } from "vue";
 import { getTokens, type LoginInfo } from "@/api/token";
 import { useUserStore } from "@/stores/user";
 import { i18nRender } from "@/locales";
+import SelectLang from "../components/SelectLang.vue";
 
 const loginInfo: LoginInfo = reactive({
   username: "",
@@ -30,6 +31,7 @@ const login = async () => {
 </script>
 
 <template>
+  <SelectLang class="language" />
   <div class="login">
     <div class="form-box">
       <div class="title">
@@ -42,7 +44,7 @@ const login = async () => {
             v-model="loginInfo.username"
             type="text"
             autocomplete="off"
-            :placeholder="i18nRender('login.username')"
+            :placeholder="i18nRender('login.input.username')"
           />
           <div class="u-icon">&nbsp;</div>
         </div>
@@ -51,12 +53,12 @@ const login = async () => {
             v-model="loginInfo.password"
             type="password"
             autocomplete="off"
-            placeholder="i18nRender('login.password')"
+            :placeholder="i18nRender('login.input.password')"
           />
           <div class="p-icon">&nbsp;</div>
         </div>
         <button class="submit" type="submit">
-          {{ i18nRender("login.button") }}
+          {{ i18nRender("login.button.login") }}
         </button>
       </form>
     </div>
@@ -64,6 +66,13 @@ const login = async () => {
 </template>
 
 <style lang="less">
+.language {
+  float: right;
+  z-index: 1;
+  top: 20px;
+  right: 100px;
+}
+
 .login {
   width: 100%;
   height: 100%;

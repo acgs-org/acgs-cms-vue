@@ -1,6 +1,6 @@
 import axios, { type AxiosInstance, type AxiosRequestConfig } from "axios";
 
-import { config } from "../config";
+import { config } from "@/config";
 import { useUserStore } from "@/stores/user";
 
 /** 自定义返回值封装 */

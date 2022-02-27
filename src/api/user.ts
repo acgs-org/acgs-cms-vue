@@ -1,4 +1,4 @@
-import { http, type ResponseVO } from "@/@core/util/axios";
+import { http, type ResponseVO } from "@/util/axios";
 
 /**
  * 注册信息类型封装

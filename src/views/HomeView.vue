@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import TheWelcome from "@/components/TheWelcome.vue";
+// import SelectLang from "../components/SelectLang.vue";
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <!-- <SelectLang /> -->
   </main>
 </template>
