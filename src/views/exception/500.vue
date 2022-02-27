@@ -4,7 +4,7 @@ import { i18nRender } from "@/locales";
 
 const router = useRouter();
 const toHome = () => {
-  router.push({ path: "/login" });
+  router.push({ path: "/home" });
 };
 </script>
 

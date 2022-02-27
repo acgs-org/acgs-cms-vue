@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { reactive } from "vue";
+import SelectLang from "../components/SelectLang.vue";
 
 import { getTokens, type LoginInfo } from "@/api/token";
 import { useUserStore } from "@/stores/user";
 import { i18nRender } from "@/locales";
-import SelectLang from "../components/SelectLang.vue";
+import { initRouter } from "@/util/router";
 
 const loginInfo: LoginInfo = reactive({
   username: "",
@@ -26,6 +27,7 @@ const login = async () => {
   if (res.success) {
     useUserStore().tokens = res.result;
     console.log("Token: ", useUserStore().getAccessToken);
+    initRouter();
   }
 };
 </script>
