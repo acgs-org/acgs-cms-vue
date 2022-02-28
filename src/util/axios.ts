@@ -23,9 +23,6 @@ export interface ResponseVO<T> {
 const axiosConfig: AxiosRequestConfig = {
   baseURL: config.baseURL || "",
   timeout: 5 * 1000,
-  headers: {
-    Authorization: useUserStore().getAccessToken,
-  },
 };
 
 const http: AxiosInstance = axios.create(axiosConfig);
@@ -35,6 +32,10 @@ const http: AxiosInstance = axios.create(axiosConfig);
 const errorHandler = (error: any) => {
   if (error.response) {
     const data: ResponseVO<unknown> = error.response.data;
+    if (data.code === 10001) {
+      // Tokens 令牌过期
+      // TODO: 执行相应操作
+    }
     return data;
   }
   return new Promise(error);
@@ -51,6 +52,12 @@ http.interceptors.request.use((originConfig) => {
 
   if (!requestConfig.method) {
     requestConfig.method = "GET";
+  }
+
+  if (useUserStore().getTokens) {
+    requestConfig.headers["Authorization"] = useUserStore().getAccessToken;
+    // 过期令牌 用于端口测试
+    // requestConfig.headers["Authorization"] = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZGVudGl0eSI6IjYyMDhhOWM3ZjJhYjU1MWU0MTI1MzgyOCIsInNjb3BlIjoic2NvcGUiLCJ0eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ2MDYyMTcxfQ.tyAIAyYRbM7z5Ucyz5MJpne65rhaVSnV8sacQlKgePw";
   }
 
   return requestConfig;
