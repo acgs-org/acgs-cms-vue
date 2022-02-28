@@ -3,6 +3,7 @@ import { reactive } from "vue";
 import SelectLang from "../components/SelectLang.vue";
 
 import { getTokens, type LoginInfo } from "@/api/token";
+import { getUserRoles } from "@/api/role";
 import { useUserStore } from "@/stores/user";
 import { i18nRender } from "@/locales";
 import { initRouter } from "@/util/router";
@@ -26,7 +27,10 @@ const login = async () => {
   const res = await getTokens(loginInfo);
   if (res.success) {
     useUserStore().tokens = res.result;
-    console.log("Token: ", useUserStore().getAccessToken);
+    const roles = await getUserRoles();
+    if (roles.success) {
+      console.log(roles.result);
+    }
     initRouter();
   }
 };
