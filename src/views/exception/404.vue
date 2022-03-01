@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 import { i18nRender } from "@/locales";
+import { useUserStore } from "@/stores";
 
 const router = useRouter();
 const toHome = () => {
+  useUserStore().logout();
   router.push({ path: "/login" });
 };
 </script>
