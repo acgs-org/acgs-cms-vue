@@ -6,7 +6,7 @@ import { getTokens, type LoginInfo } from "@/api/token";
 import { getUserRoles } from "@/api/role";
 import { useUserStore } from "@/stores/user";
 import { i18nRender } from "@/locales";
-import { initRouter } from "@/util/router";
+import { initMenus, initRouter } from "@/util/router";
 
 const loginInfo: LoginInfo = reactive({
   username: "",
@@ -14,6 +14,7 @@ const loginInfo: LoginInfo = reactive({
 });
 
 const login = async () => {
+  // 输入校验
   if (loginInfo.username === "") {
     alert("请输入用户名");
     return;
@@ -24,14 +25,18 @@ const login = async () => {
     return;
   }
 
-  const res = await getTokens(loginInfo);
-  if (res.success) {
-    useUserStore().tokens = res.result;
+  // 获取 tokens 令牌
+  const tokens = await getTokens(loginInfo);
+  if (tokens.success) {
+    // tokens 令牌获取成功, 保存 tokens 信息
+    useUserStore().tokens = tokens.result;
+    // 获取用户“角色组”信息
     const roles = await getUserRoles();
     if (roles.success) {
-      console.log(roles.result);
+      // 角色获取成功 初始化路由 及 导航菜单
+      initMenus(roles.result);
+      initRouter();
     }
-    initRouter();
   }
 };
 </script>

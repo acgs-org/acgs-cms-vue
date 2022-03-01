@@ -1,12 +1,23 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+
 import { MenuOutlined, MenuUnfoldOutlined } from "@ant-design/icons-vue";
+
 import { getMenus } from "@/util/router";
 
 const selectedKeys = ref<Array<string>>([]);
 const collapsed = ref<boolean>(false);
 
 const menus = getMenus();
+const router = useRouter();
+
+// 路由跳转方法
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const toRoute = (menu: any) => {
+  console.log(menu.path);
+  router.push(menu.path);
+};
 </script>
 
 <template>
@@ -27,7 +38,11 @@ const menus = getMenus();
             <component :is="menu.icon"></component>
             <span>{{ menu.title }}</span>
           </template>
-          <a-menu-item v-for="subMenu in menu.children" :key="subMenu.id">
+          <a-menu-item
+            v-for="subMenu in menu.children"
+            :key="subMenu.id"
+            @click="toRoute(subMenu)"
+          >
             {{ subMenu.title }}
           </a-menu-item>
         </a-sub-menu>
