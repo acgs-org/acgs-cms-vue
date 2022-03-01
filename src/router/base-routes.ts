@@ -3,6 +3,10 @@ import type { RouteRecordRaw } from "vue-router";
 /** 全局通用路由配置 */
 export const baseRoutes: Array<RouteRecordRaw> = [
   {
+    path: "/",
+    redirect: "/login",
+  },
+  {
     path: "/login",
     component: () => import("../views/Login.vue"),
   },
