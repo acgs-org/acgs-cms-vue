@@ -21,6 +21,7 @@ export interface Tokens {
  */
 const tokenApi = {
   Login: "/user/login",
+  Refresh: "/user/refresh",
 };
 
 /**
@@ -30,4 +31,8 @@ const tokenApi = {
  */
 export const getTokens = (loginInfo: LoginInfo) => {
   return http.post<LoginInfo, ResponseVO<Tokens>>(tokenApi.Login, loginInfo);
+};
+
+export const refreshTokens = () => {
+  return http.post<unknown, ResponseVO<Tokens>>(tokenApi.Refresh);
 };
