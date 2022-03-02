@@ -1,15 +1,11 @@
 <script setup lang="ts">
-import { reactive, ref } from "vue";
+import { ref } from "vue";
+
 import { useAppStore } from "@/stores";
+import { i18nRender } from "@/locales/index";
 
 // 获取当前语言类型
 let locale = ref(useAppStore().getLocalLang);
-
-/** 语言切换显示项, 两个选项直接反向处理 */
-const languageLocales = reactive({
-  "zh-CN": "English",
-  "en-US": "简体中文",
-});
 
 /** 修改当前语言类型 */
 const change = () => {
@@ -19,7 +15,7 @@ const change = () => {
 
 <template>
   <button class="button" @click="change()">
-    {{ languageLocales[locale] }}
+    {{ i18nRender("language") }}
   </button>
 </template>
 
