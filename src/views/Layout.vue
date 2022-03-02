@@ -5,6 +5,8 @@ import { useRouter } from "vue-router";
 import { MenuOutlined, MenuUnfoldOutlined } from "@ant-design/icons-vue";
 
 import { getMenus } from "@/util/router";
+import { i18nRender } from "@/locales";
+import { useAppStore } from "@/stores";
 
 const selectedKeys = ref<Array<string>>([]);
 const collapsed = ref<boolean>(false);
@@ -17,6 +19,10 @@ const router = useRouter();
 const toRoute = (menu: any) => {
   console.log(menu.path);
   router.push(menu.path);
+};
+
+const changeLanguage = () => {
+  useAppStore().changeLocalLang();
 };
 </script>
 
@@ -62,6 +68,9 @@ const toRoute = (menu: any) => {
           class="trigger"
           @click="() => (collapsed = !collapsed)"
         />
+        <span @click="changeLanguage()" class="language">
+          {{ i18nRender("language") }}
+        </span>
       </a-layout-header>
 
       <!-- 主画面显示区 -->
@@ -113,6 +122,25 @@ const toRoute = (menu: any) => {
 
     .trigger:hover {
       color: #1890ff;
+    }
+
+    .language {
+      border: 1px solid #000;
+      color: #000;
+      display: inline-block;
+      // float: right;
+      box-sizing: border-box;
+      width: 72px;
+      height: 28px;
+      line-height: 28px;
+      margin: auto auto;
+      margin-right: 40px;
+      text-align: center;
+      border-radius: 2px;
+      cursor: pointer;
+      font-family: PingFangSC-Medium;
+      font-size: 16px;
+      opacity: 0.6;
     }
   }
 }
