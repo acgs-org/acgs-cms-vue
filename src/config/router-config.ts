@@ -85,6 +85,13 @@ export const stage: Array<Stage> = [
         roles: ["root"],
         enable: false,
       },
+      {
+        id: "1-2",
+        title: i18nRender("stage.1-2.title"),
+        path: "/home/term/rabbit",
+        roles: ["root"],
+        enable: false,
+      },
     ],
   },
   {
@@ -121,17 +128,18 @@ export const stage: Array<Stage> = [
 export const asyncRouterMap: RouteRecordRaw = {
   path: "/home",
   component: () => import("../views/Layout.vue"),
-  // component: LayoutVue,
   children: [
     {
       path: "/home/term/nacos",
       component: () => import("../views/term/Nacos.vue"),
-      // component: NacosVue,
+    },
+    {
+      path: "/home/term/rabbit",
+      component: () => import("../views/term/Rabbit.vue"),
     },
     {
       path: "/home/user/info",
       component: () => import("../views/user/Info.vue"),
-      // component: InfoVue,
     },
   ],
 };
