@@ -5,6 +5,7 @@ import stage from "./en-US/stage";
 
 export default {
   message: "-",
+  language: "中文简体",
 
   ...exception,
   ...login,
