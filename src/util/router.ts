@@ -136,17 +136,23 @@ export const initRouter = () => {
     // 判断当前路由是否在许可 path 路径集合中
     if (!pathes.includes(route.path)) {
       // 当前路由不在许可 path 路径集合中
-      badPath.push(route.path);
+      if (!badPath.includes(route.path)) {
+        // 当前路由尚未添加
+        badPath.push(route.path);
+      }
     }
   });
+
   // 添加路由配置
   router.addRoute(asyncRouterMap);
+
   // 移除不允许的路由
   badPath.forEach((path) => {
     router.removeRoute(path);
   });
+
   // 跳转到首页
-  router.push("/home");
+  setTimeout(() => router.push("/home"), 500);
 };
 
 export const getMenus = () => {

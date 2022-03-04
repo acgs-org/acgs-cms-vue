@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 
 import { MenuOutlined, MenuUnfoldOutlined } from "@ant-design/icons-vue";
@@ -14,10 +14,15 @@ const collapsed = ref<boolean>(false);
 const menus = getMenus();
 const router = useRouter();
 
+onMounted(() => {
+  setTimeout(() => {
+    useAppStore().changeLoading();
+  }, 1000);
+});
+
 // 路由跳转方法
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const toRoute = (menu: any) => {
-  console.log(menu.path);
   router.push(menu.path);
 };
 
@@ -42,15 +47,17 @@ const changeLanguage = () => {
         <a-sub-menu v-for="menu in menus" :key="menu.id">
           <template #title>
             <component :is="menu.icon"></component>
-            <span>{{ menu.title }}</span>
+            <span>{{ i18nRender(`stage.${menu.id}.title`) }}</span>
           </template>
-          <a-menu-item
-            v-for="subMenu in menu.children"
-            :key="subMenu.id"
-            @click="toRoute(subMenu)"
-          >
-            {{ subMenu.title }}
-          </a-menu-item>
+          <template v-if="menu.children">
+            <a-menu-item
+              v-for="subMenu in menu.children"
+              :key="subMenu.id"
+              @click="toRoute(subMenu)"
+            >
+              {{ i18nRender(`stage.${subMenu.id}.title`) }}
+            </a-menu-item>
+          </template>
         </a-sub-menu>
       </a-menu>
     </a-layout-sider>
@@ -91,6 +98,7 @@ const changeLanguage = () => {
 <style lang="less">
 .layout {
   height: 100%;
+  min-height: 680px;
   background: #fff;
 
   .sider {
