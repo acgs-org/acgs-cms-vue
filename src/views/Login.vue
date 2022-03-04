@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { reactive } from "vue";
 import SelectLang from "../components/SelectLang.vue";
+import { message } from "ant-design-vue";
 
 import { getTokens, type LoginInfo } from "@/api/token";
 import { getUserRoles } from "@/api/role";
-import { useUserStore } from "@/stores/user";
+import { useUserStore, useAppStore } from "@/stores";
 import { i18nRender } from "@/locales";
 import { initMenus, initRouter } from "@/util/router";
 
@@ -16,14 +17,17 @@ const loginInfo: LoginInfo = reactive({
 const login = async () => {
   // 输入校验
   if (loginInfo.username === "") {
-    alert("请输入用户名");
+    message.warning("请输入用户名");
     return;
   }
 
   if (loginInfo.password === "") {
-    alert("请输入密码");
+    message.warning("请输入密码");
     return;
   }
+
+  // 切换加载状态
+  useAppStore().changeLoading();
 
   // 获取 tokens 令牌
   const tokens = await getTokens(loginInfo);
@@ -84,11 +88,18 @@ const login = async () => {
   right: 100px;
 }
 
+.loading {
+  position: absolute;
+  z-index: 1;
+  top: 48%;
+  left: 48%;
+}
+
 .login {
   width: 100%;
   height: 100%;
   background-size: auto;
-  background: #1b2c5f url("../assets/image/login/login-bg.png") no-repeat center
+  background: #1b2c5f url("@/assets/image/login/login-bg.png") no-repeat center
     center;
 
   .form-box {
@@ -135,14 +146,14 @@ const login = async () => {
         }
 
         .u-icon {
-          background: url("../assets/image/login/u-icon.png") no-repeat;
+          background: url("@/assets/image/login/u-icon.png") no-repeat;
           background-size: 100% auto;
           background-position: left bottom;
         }
 
         .p-icon {
           width: 100%;
-          background: url("../assets/image/login/p-icon.png") no-repeat;
+          background: url("@/assets/image/login/p-icon.png") no-repeat;
           background-size: 100% auto;
           background-position: left bottom;
         }
@@ -157,7 +168,7 @@ const login = async () => {
         box-sizing: border-box;
         padding: 0 10px;
         padding-left: 74px;
-        background: url("../assets/image/login/login-btn.png") no-repeat;
+        background: url("@/assets/image/login/login-btn.png") no-repeat;
         background-size: 90% auto;
         background-position: center bottom;
         border: none;
