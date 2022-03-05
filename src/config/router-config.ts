@@ -1,7 +1,11 @@
 import type { RouteRecordRaw } from "vue-router";
 
 /** 菜单栏图标导入 */
-import { FundOutlined, TeamOutlined } from "@ant-design/icons-vue";
+import {
+  FileSearchOutlined,
+  FundOutlined,
+  TeamOutlined,
+} from "@ant-design/icons-vue";
 
 // import LayoutVue from "@/views/Layout.vue";
 // import NacosVue from "@/views/term/Nacos.vue";
@@ -100,6 +104,21 @@ export const stage: Array<Stage> = [
       },
     ],
   },
+  {
+    id: "3",
+    icon: FileSearchOutlined,
+    path: "/home/log",
+    roles: ["admin"],
+    enable: true,
+    children: [
+      {
+        id: "3-1",
+        path: "/home/log/login",
+        roles: ["admin"],
+        enable: true,
+      },
+    ],
+  },
 ];
 
 /**
@@ -129,6 +148,10 @@ export const asyncRouterMap: RouteRecordRaw = {
     {
       path: "/home/user/info",
       component: () => import("../views/user/Info.vue"),
+    },
+    {
+      path: "/home/log/login",
+      component: () => import("../views/log/LoginLog.vue"),
     },
   ],
 };
