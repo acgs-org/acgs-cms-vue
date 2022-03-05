@@ -1,7 +1,8 @@
-import login from "./zh-CN/login";
 import exception from "./zh-CN/exception";
-import token from "./zh-CN/token";
+import login from "./zh-CN/login";
+import page from "./zh-CN/page";
 import stage from "./zh-CN/stage";
+import token from "./zh-CN/token";
 
 export default {
   message: "-",
@@ -9,6 +10,7 @@ export default {
 
   ...exception,
   ...login,
+  ...page,
   ...stage,
   ...token,
 };

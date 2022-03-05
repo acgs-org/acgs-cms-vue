@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
+
 import TablePage, { type Column } from "@/components/page/TablePage.vue";
 import { getLoginLog, type LoginLogInfo } from "@/api/log";
-
-const title = "登录日志页";
-const subTitle = "用于查看用户的登录记录";
+import { i18nRender } from "@/locales";
 
 const tableData = ref<Array<LoginLogInfo>>([]);
 const loading = ref<boolean>(true);
@@ -27,8 +26,8 @@ const columns: Array<Column> = [
 
 <template>
   <TablePage
-    :title="title"
-    :sub-title="subTitle"
+    :title="i18nRender('page.log.login-log.title')"
+    :sub-title="i18nRender('page.log.login-log.sub-title')"
     :data="tableData"
     :columns="columns"
     :loading="loading"
