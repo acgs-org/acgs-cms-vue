@@ -14,7 +14,6 @@ onMounted(() => {
     if (res.success) {
       tableData.value = res.result;
       loading.value = false;
-      console.log(tableData.value);
     }
   });
 });
